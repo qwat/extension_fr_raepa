@@ -15,7 +15,7 @@ cat << EOF
 Usage: $0 [options]
 
 -p|--pgservice       PG service to connect to the database.
--s|--srid            PostGIS SRID. Default to 21781 (ch1903)
+-s|--srid            PostGIS SRID. Default to 2154 (Lambert93)
 -d|--drop-schema     Drop schema (cascaded) if it exists
 EOF
 }
@@ -32,7 +32,7 @@ eval set -- "$ARGS";
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Default values
-SRID=21781
+SRID=2154
 DROPSCHEMA=0
 
 while true; do
@@ -71,20 +71,20 @@ fi
 
 if [[ "$DROPSCHEMA" -eq 1 ]]; then
 	psql service=${PGSERVICE} -v ON_ERROR_STOP=1 \
-         -c "DROP SCHEMA IF EXISTS qwat_ch_vd_sire CASCADE"
+         -c "DROP SCHEMA IF EXISTS raepa CASCADE"
 fi
 
-# create the qwat_ch_vd_sire schema
-psql service=$PGSERVICE -v ON_ERROR_STOP=1 -c "CREATE SCHEMA IF NOT EXISTS qwat_ch_vd_sire"
+# create the raepa schema
+psql service=$PGSERVICE -v ON_ERROR_STOP=1 -c "CREATE SCHEMA IF NOT EXISTS raepa"
 
-# add the ch_vd_sire columns
-psql service=$PGSERVICE -v ON_ERROR_STOP=1 -v SRID=$SRID -f ${DIR}/sire_columns.sql
+# add the raepa columns
+psql service=$PGSERVICE -v ON_ERROR_STOP=1 -v SRID=$SRID -f ${DIR}/raepa_columns.sql
 
-# re-create the QWAT views, for the new ch_vd_sire columns to be taken into account
+# re-create the QWAT views, for the new raepa columns to be taken into account
 QWAT_REPO="$(git rev-parse --show-toplevel)/qwat-data-model"
 PGSERVICE=${PGSERVICE} SRID=${SRID} ${QWAT_REPO}/ordinary_data/views/rewrite_views.sh
 
-# create the ch_vd_sire views
+# create the raepa views
 PGSERVICE=${PGSERVICE} SRID=${SRID} ${DIR}/insert_views.sh
 
 exit 0
