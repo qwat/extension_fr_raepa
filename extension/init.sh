@@ -81,7 +81,7 @@ psql service=$PGSERVICE -v ON_ERROR_STOP=1 -c "CREATE SCHEMA IF NOT EXISTS raepa
 psql service=$PGSERVICE -v ON_ERROR_STOP=1 -v SRID=$SRID -f ${DIR}/raepa_columns.sql
 
 # re-create the QWAT views, for the new raepa columns to be taken into account
-QWAT_REPO="$(git rev-parse --show-toplevel)/qwat-data-model"
+QWAT_REPO="$(git rev-parse --show-toplevel)"
 PGSERVICE=${PGSERVICE} SRID=${SRID} ${QWAT_REPO}/ordinary_data/views/rewrite_views.sh
 
 # create the raepa views
