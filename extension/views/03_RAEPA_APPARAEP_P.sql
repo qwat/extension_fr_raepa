@@ -159,7 +159,7 @@ UNION
         ELSE
             '99' -- Autre / Appareillage dont le type ne figure pas dans la liste ci-dessus
         END AS fnappaep
-        , valve.diameter_nominal::Numeric(5) AS diametre -- Diamètre nominal de l'appareillage (en millimètres) / TODO conversion si nécessaire
+        , vl_valve_diameter.value_fr::Numeric(5) AS diametre -- Diamètre nominal de l'appareillage (en millimètres) / TODO conversion si nécessaire
         , valve.year_end::varchar(4) AS anfinpose -- Année marquant la fin de la période de mise en service de l'appareillage
         , valve.fk_pipe::varchar(254) AS idcanamont -- Identifiants des canalisations d'amont de l'ouvrage (clés étrangères)
         , valve.fk_pipe::varchar(254) AS idcanaval -- Identifiants des canalisations d'aval de l'ouvrage (clés étrangères) / TODO est-ce pertinent ? NULL possible ?
@@ -196,6 +196,7 @@ UNION
         ''::varchar(100) AS sourattrib -- TODO SOURATTRIB Auteur de la saisie des données attributaires (lorsque différent de l'auteur de la géolocalisation) Caractère (100)
     FROM
         qwat_od.vw_export_valve valve
+    LEFT JOIN qwat_vl.nominal_diameter vl_valve_diameter ON (valve.fk_nominal_diameter = vl_valve_diameter.id)
     LEFT JOIN (
         SELECT
             date(pg_xact_commit_timestamp(xmin)) lastmodif
