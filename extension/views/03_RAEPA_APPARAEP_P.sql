@@ -159,7 +159,7 @@ UNION
         ELSE
             '99' -- Autre / Appareillage dont le type ne figure pas dans la liste ci-dessus
         END AS fnappaep
-        , vl_valve_diameter.value_fr::Numeric(5) AS diametre -- Diamètre nominal de l'appareillage (en millimètres) / TODO conversion si nécessaire
+        , vl_valve_diameter.short_fr::Numeric(5) AS diametre -- Diamètre nominal de l'appareillage (en millimètres) / TODO conversion si nécessaire
         , valve.year_end::varchar(4) AS anfinpose -- Année marquant la fin de la période de mise en service de l'appareillage
         , valve.fk_pipe::varchar(254) AS idcanamont -- Identifiants des canalisations d'amont de l'ouvrage (clés étrangères)
         , valve.fk_pipe::varchar(254) AS idcanaval -- Identifiants des canalisations d'aval de l'ouvrage (clés étrangères) / TODO est-ce pertinent ? NULL possible ?
