@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "--- Running RAEPA extension init ---"
+
 GNUGETOPT="getopt"
 if [[ "$OSTYPE" =~ FreeBSD* ]] || [[ "$OSTYPE" =~ darwin* ]]; then
   GNUGETOPT="/usr/local/bin/getopt"
@@ -29,7 +31,12 @@ fi
 
 eval set -- "$ARGS";
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
+RAEPA_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
+echo "--- current directory is ${RAEPA_DIR} ---" 
 
 # Default values
 SRID=2154
@@ -70,21 +77,38 @@ then
 fi
 
 if [[ "$DROPSCHEMA" -eq 1 ]]; then
+  echo "--- dropping schema raepa --- "
 	psql service=${PGSERVICE} -v ON_ERROR_STOP=1 \
          -c "DROP SCHEMA IF EXISTS raepa CASCADE"
 fi
 
+echo ----- deactivate audit triggers ------------------------------
+
+psql -U postgres service=${PGSERVICE} -f ../../update/delta/pre-all.sql
+
+
 # create the raepa schema
+echo "--- creating schema raepa --- "
 psql service=$PGSERVICE -v ON_ERROR_STOP=1 -c "CREATE SCHEMA IF NOT EXISTS raepa"
 
+# execute global pre-all logic (drop views & co)
+
 # add the raepa columns
-psql service=$PGSERVICE -v ON_ERROR_STOP=1 -v SRID=$SRID -f ${DIR}/raepa_columns.sql
+echo "--- adding raepa columns --- "
+
+psql service=$PGSERVICE -v ON_ERROR_STOP=1 -v SRID=$SRID -f ${RAEPA_DIR}/raepa_columns.sql
+
+# execute global post-all logic (recreate views, functions, enable audit triggers )
 
 # re-create the QWAT views, for the new raepa columns to be taken into account
-QWAT_REPO="$(git rev-parse --show-toplevel)"
-PGSERVICE=${PGSERVICE} SRID=${SRID} ${QWAT_REPO}/ordinary_data/views/rewrite_views.sh
+echo "--- recreating raepa views (core views untouched)---- "
+PGSERVICE=${PGSERVICE} SRID=${SRID} ../../ordinary_data/views/rewrite_views.sh 
 
 # create the raepa views
-PGSERVICE=${PGSERVICE} SRID=${SRID} ${DIR}/insert_views.sh
+PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/insert_views.sh
+
+echo "---- reactivate audit triggers ------- "
+
+psql -U postgres service=${PGSERVICE} -f ../../update/delta/post-all.sql
 
 exit 0
