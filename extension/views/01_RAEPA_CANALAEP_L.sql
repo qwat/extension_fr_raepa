@@ -105,7 +105,7 @@ SELECT
     ELSE
         '03' -- Classe C
     END AS qualglocz , -- TODO N'existe pas pour 'pipe' dans QWAT. Qualité de la géolocalisation altimétrique (Z) Codes de la table VAL_RAEPA_QUALITE_GEOLOC Caractère (2)
-    maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) TODO nécessite track_commit_timestamp = on dans postgresql.conf
+    maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) 
     ''::varchar(100) AS sourmaj , -- TODO Source de la mise à jour Caractère (100)
     ''::varchar(2) AS qualannee , -- TODO Fiabilité, lorsque ANDEBPOSE = ANFINPOSE, de l'année de pose Codes de la table VAL_RAEPA_QUALITE_ANPOSE Caractère (2)
     ''::varchar(10) AS dategeoloc , -- TODO Date de la géolocalisation Date (10)
@@ -117,10 +117,15 @@ FROM
     LEFT JOIN qwat_vl.pipe_material material ON pipe.fk_material = material.id
     LEFT JOIN qwat_vl. "precision" "precision" ON pipe.fk_precision = "precision".id
     LEFT JOIN (
+        -- extract last updated row from logged actions tracked by audit triggers
         SELECT
-            date(pg_xact_commit_timestamp(xmin)) lastmodif
-            , *
-        FROM
-            qwat_od.pipe) maj ON pipe.id = maj.id
+			(row_data -> 'id')::integer as id,
+			date(max(action_tstamp_clk)) as lastmodif
+		FROM qwat_sys.logged_actions
+		WHERE
+		    schema_name = 'qwat_od' and table_name = 'pipe'
+		GROUP BY  (row_data -> 'id') 
+
+        ) maj ON pipe.id = maj.id
 ORDER BY
     datemaj

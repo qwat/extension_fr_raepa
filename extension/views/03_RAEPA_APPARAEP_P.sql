@@ -43,7 +43,7 @@ CREATE OR REPLACE VIEW raepa.raepa_apparaep_p AS
         ELSE
             '03' -- Classe C
         END AS qualglocz , -- Qualité de la géolocalisation altimétrique (Z) Codes de la table VAL_RAEPA_QUALITE_GEOLOC
-        maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) TODO nécessite track_commit_timestamp = on dans postgresql.conf
+        maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) 
         ''::varchar(100) AS sourmaj , -- TODO Source de la mise à jour Caractère (100)
         ''::varchar(2) AS qualannee , -- TODO Fiabilité, lorsque ANDEBPOSE = ANFINPOSE, de l'année de pose Codes de la table VAL_RAEPA_QUALITE_ANPOSE Caractère (2)
         ''::varchar(10) AS dategeoloc , -- TODO Date de la géolocalisation Date (10)
@@ -52,11 +52,15 @@ CREATE OR REPLACE VIEW raepa.raepa_apparaep_p AS
     FROM
         qwat_od.vw_export_hydrant hydrant
     LEFT JOIN (
-        SELECT
-            date(pg_xact_commit_timestamp(xmin)) lastmodif
-            , *
-        FROM
-            qwat_od.hydrant) maj ON hydrant.id = maj.id)
+       SELECT
+			(row_data -> 'id')::integer as id,
+			date(max(action_tstamp_clk)) as lastmodif
+		FROM qwat_sys.logged_actions
+		WHERE
+			schema_name = 'qwat_od'
+			AND table_name = 'vw_export_hydrant'
+		GROUP BY  (row_data -> 'id')
+       ) maj ON hydrant.id = maj.id)
 --
 -- FIN DE qwat_od.vw_export_hydrant
 --
@@ -114,7 +118,7 @@ UNION
         ELSE
             '03' -- Classe C
         END AS qualglocz , -- Qualité de la géolocalisation altimétrique (Z) Codes de la table VAL_RAEPA_QUALITE_GEOLOC
-        maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) TODO nécessite track_commit_timestamp = on dans postgresql.conf
+        maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) 
         ''::varchar(100) AS sourmaj , -- TODO Source de la mise à jour Caractère (100)
         ''::varchar(2) AS qualannee , -- TODO Fiabilité, lorsque ANDEBPOSE = ANFINPOSE, de l'année de pose Codes de la table VAL_RAEPA_QUALITE_ANPOSE Caractère (2)
         ''::varchar(10) AS dategeoloc , -- TODO Date de la géolocalisation Date (10)
@@ -125,9 +129,14 @@ UNION
         JOIN qwat_od.vw_node_element element ON installation.id = element.id
         LEFT JOIN (
             SELECT
-                date(pg_xact_commit_timestamp(xmin)) lastmodif , *
-            FROM
-                qwat_od.network_element) maj ON element.id = maj.id)
+			(row_data -> 'id')::integer as id,
+			date(max(action_tstamp_clk)) as lastmodif
+		FROM qwat_sys.logged_actions
+		WHERE
+			schema_name = 'qwat_od'
+			AND table_name = 'vw_qwat_installation'
+		GROUP BY  (row_data -> 'id')
+            ) maj ON element.id = maj.id)
     --
     -- FIN DE qwat_od.network_element / pressure_control
     --
@@ -188,7 +197,7 @@ UNION
         ELSE
             '03' -- Classe C
         END AS qualglocz , -- Qualité de la géolocalisation altimétrique (Z) Codes de la table VAL_RAEPA_QUALITE_GEOLOC
-        maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) TODO nécessite track_commit_timestamp = on dans postgresql.conf
+        maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) 
         ''::varchar(100) AS sourmaj , -- TODO Source de la mise à jour Caractère (100)
         ''::varchar(2) AS qualannee , -- TODO Fiabilité, lorsque ANDEBPOSE = ANFINPOSE, de l'année de pose Codes de la table VAL_RAEPA_QUALITE_ANPOSE Caractère (2)
         ''::varchar(10) AS dategeoloc , -- TODO Date de la géolocalisation Date (10)
@@ -198,11 +207,15 @@ UNION
         qwat_od.vw_export_valve valve
     LEFT JOIN qwat_vl.nominal_diameter vl_valve_diameter ON (valve.fk_nominal_diameter = vl_valve_diameter.id)
     LEFT JOIN (
-        SELECT
-            date(pg_xact_commit_timestamp(xmin)) lastmodif
-            , *
-        FROM
-            qwat_od.valve) maj ON valve.id = maj.id)
+       SELECT
+			(row_data -> 'id')::integer as id,
+			date(max(action_tstamp_clk)) as lastmodif
+		FROM qwat_sys.logged_actions
+		WHERE
+			schema_name = 'qwat_od'
+			AND table_name = 'valve'
+		GROUP BY  (row_data -> 'id')
+       ) maj ON valve.id = maj.id)
 --
 -- FIN DE qwat_od.vw_export_valve
 --
@@ -258,7 +271,7 @@ UNION
         ELSE
             '03' -- Classe C
         END AS qualglocz , -- Qualité de la géolocalisation altimétrique (Z) Codes de la table VAL_RAEPA_QUALITE_GEOLOC
-        maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) TODO nécessite track_commit_timestamp = on dans postgresql.conf
+        maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10)
         ''::varchar(100) AS sourmaj , -- TODO Source de la mise à jour Caractère (100)
         ''::varchar(2) AS qualannee , -- TODO Fiabilité, lorsque ANDEBPOSE = ANFINPOSE, de l'année de pose Codes de la table VAL_RAEPA_QUALITE_ANPOSE Caractère (2)
         ''::varchar(10) AS dategeoloc , -- TODO Date de la géolocalisation Date (10)
@@ -268,10 +281,14 @@ UNION
         qwat_od.vw_export_part part
     LEFT JOIN (
         SELECT
-            date(pg_xact_commit_timestamp(xmin)) lastmodif
-            , *
-        FROM
-            qwat_od.node) maj ON part.id = maj.id)
+			(row_data -> 'id')::integer as id,
+			date(max(action_tstamp_clk)) as lastmodif
+		FROM qwat_sys.logged_actions
+		WHERE
+			schema_name = 'qwat_od'
+			AND table_name = 'vw_element_part'
+		GROUP BY  (row_data -> 'id')
+            ) maj ON part.id = maj.id)
 --
 -- FIN DE qwat_od.vw_export_part
 --

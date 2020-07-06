@@ -59,7 +59,7 @@ ELSE
     '03' -- Classe C
 END AS qualglocz , -- Qualité de la géolocalisation altimétrique (Z) Codes de la table VAL_RAEPA_QUALITE_GEOLOC
 installation.fk_parent AS idcanppale , -- Identifiant de la canalisation principale (clé étrangère)
-maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10) TODO nécessite track_commit_timestamp = on dans postgresql.conf
+maj.lastmodif AS datemaj , -- Date de la dernière mise à jour des informations Date (10)
 ''::varchar(100) AS sourmaj , -- TODO Source de la mise à jour Caractère (100)
 ''::varchar(2) AS qualannee , -- TODO Fiabilité, lorsque ANDEBPOSE = ANFINPOSE, de l'année de pose Codes de la table VAL_RAEPA_QUALITE_ANPOSE Caractère (2)
 ''::varchar(10) AS dategeoloc , -- TODO Date de la géolocalisation Date (10)
@@ -69,8 +69,13 @@ FROM
     qwat_od.vw_qwat_installation installation
     JOIN qwat_od.vw_node_element element ON installation.id = element.id
     LEFT JOIN (
-        SELECT
-            date(pg_xact_commit_timestamp(xmin)) lastmodif
-            , *
-        FROM
-            qwat_od.network_element) maj ON element.id = maj.id;
+            -- get latest logged date for installations 
+            SELECT
+                (row_data -> 'id')::integer as id,
+                date(max(action_tstamp_clk)) as lastmodif
+            FROM qwat_sys.logged_actions
+            WHERE
+                schema_name = 'qwat_od'
+                AND table_name = 'vw_element_installation'
+            GROUP BY  (row_data -> 'id')
+            ) maj ON element.id = maj.id;
