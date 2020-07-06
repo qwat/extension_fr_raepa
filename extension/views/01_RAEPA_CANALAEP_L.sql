@@ -55,7 +55,7 @@ SELECT
         '99' -- autre
     END AS materiau , -- Matériau de la canalisation d'adduction d'eau potableCodes de la table VAL_RAEPA_MATERIAU
     material.diameter_nominal AS diametre , -- Diamètre nominal de la canalisation (en millimètres)
-    pipe.year_end AS anfinpose , -- Année marquant la fin de la période de pose de la canalisation
+    pipe.year AS anfinpose , -- Année marquant la fin de la période de pose de la canalisation
     -- Il n'y a pas d'information sur la circulation dans QWAT
     '00' AS modecirc , -- Mode de circulation de l'eau à l'intérieur de la canalisation Codes de la table VAL_RAEPA_MODE_CIRCULATION
     CASE pipe.fk_watertype

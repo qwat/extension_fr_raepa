@@ -15,7 +15,7 @@ CREATE OR REPLACE VIEW raepa.raepa_apparaep_p AS
         hydrant.distributor_name AS gexploit , -- TODO Gestionnaire exploitant du réseau
         '06' AS fnappaep
         , NULL AS diametre -- Diamètre nominal de l'appareillage (en millimètres) / TODO
-        , hydrant.year_end::varchar(4) AS anfinpose -- Année marquant la fin de la période de mise en service de l'appareillage
+        , hydrant.year::varchar(4) AS anfinpose -- Année marquant la fin de la période de mise en service de l'appareillage
         , NULL::varchar(254) AS idcanamont -- Identifiants des canalisations d'amont de l'ouvrage (clés étrangères) / TODO intersection ?
         , NULL::varchar(254) AS idcanaval -- Identifiants des canalisations d'aval de l'ouvrage (clés étrangères) / TODO intersection ?
         , NULL::varchar(254) AS idcanppale -- Identifiant de la canalisation principale (clé étrangère) / TODO intersection ?
@@ -90,7 +90,8 @@ UNION
         WHEN 'pressurecontrol' THEN
             '05' -- Régulateur de pression / Régulateur de pression
         END AS fnappaep , -- Fonction de l'ouvrage d'adduction d'eau potable Codes de la table VAL_RAEPA_FONC_OUV_AE
-        NULL::Numeric(5) AS diameter , element.year_end::varchar(4) AS anfinpose , -- Année marquant la fin de la période de mise en service de l'ouvrage
+        NULL::Numeric(5) AS diameter , 
+        element.year::varchar(4) AS anfinpose , -- Année marquant la fin de la période de mise en service de l'ouvrage
         installation.fk_pipe_in::varchar(254) AS idcanamont , -- Identifiants des canalisations d'amont de l'ouvrage (clés étrangères)
         installation.fk_pipe_out::varchar(254) AS idcanaval , -- Identifiants des canalisations d'aval de l'ouvrage (clés étrangères)
         installation.fk_parent::varchar(254) AS idcanppale , -- Identifiant de la canalisation principale (clé étrangère)
@@ -169,7 +170,7 @@ UNION
             '99' -- Autre / Appareillage dont le type ne figure pas dans la liste ci-dessus
         END AS fnappaep
         , vl_valve_diameter.short_fr::Numeric(5) AS diametre -- Diamètre nominal de l'appareillage (en millimètres) / TODO conversion si nécessaire
-        , valve.year_end::varchar(4) AS anfinpose -- Année marquant la fin de la période de mise en service de l'appareillage
+        , valve.year::varchar(4) AS anfinpose -- Année marquant la fin de la période de mise en service de l'appareillage
         , valve.fk_pipe::varchar(254) AS idcanamont -- Identifiants des canalisations d'amont de l'ouvrage (clés étrangères)
         , valve.fk_pipe::varchar(254) AS idcanaval -- Identifiants des canalisations d'aval de l'ouvrage (clés étrangères) / TODO est-ce pertinent ? NULL possible ?
         , valve.fk_pipe::varchar(254) AS idcanppale -- Identifiant de la canalisation principale (clé étrangère)
@@ -243,7 +244,7 @@ UNION
             '99' -- Autre / Appareillage dont le type ne figure pas dans la liste ci-dessus
         END AS fnappaep
         , 0::Numeric(5) AS diametre -- Diamètre nominal de l'appareillage (en millimètres) / TODO
-        , part.year_end::varchar(4) AS anfinpose -- Année marquant la fin de la période de mise en service de l'appareillage
+        , part.year::varchar(4) AS anfinpose -- Année marquant la fin de la période de mise en service de l'appareillage
         , part.fk_pipe::varchar(254) AS idcanamont -- Identifiants des canalisations d'amont de l'ouvrage (clés étrangères)
         , part.fk_pipe::varchar(254) AS idcanaval -- Identifiants des canalisations d'aval de l'ouvrage (clés étrangères) / TODO est-ce pertinent ? NULL possible ?
         , part.fk_pipe::varchar(254) AS idcanppale -- Identifiant de la canalisation principale (clé étrangère)
