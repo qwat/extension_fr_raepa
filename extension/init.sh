@@ -84,7 +84,7 @@ fi
 
 echo ----- deactivate audit triggers ------------------------------
 
-psql -U postgres service=${PGSERVICE} -f ../../update/delta/pre-all.sql
+psql -U postgres service=${PGSERVICE} -f ${RAEPA_DIR}/delta/pre-all.sql
 
 
 # create the raepa schema
@@ -102,13 +102,13 @@ psql service=$PGSERVICE -v ON_ERROR_STOP=1 -v SRID=$SRID -f ${RAEPA_DIR}/raepa_c
 
 # re-create the QWAT views, for the new raepa columns to be taken into account
 echo "--- recreating raepa views (core views untouched)---- "
-PGSERVICE=${PGSERVICE} SRID=${SRID} ../../ordinary_data/views/rewrite_views.sh 
+PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/rewrite_views.sh 
 
 # create the raepa views
 PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/insert_views.sh
 
 echo "---- reactivate audit triggers ------- "
 
-psql -U postgres service=${PGSERVICE} -f ../../update/delta/post-all.sql
+psql -U postgres service=${PGSERVICE} -f ${RAEPA_DIR}/delta/post-all.sql
 
 exit 0
