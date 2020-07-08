@@ -33,8 +33,11 @@ WHEN 'installation' THEN
     '99' -- TODO ? Autre / Ouvrage dont le type ne figure pas dans la liste ci-dessus
 END AS fnouvaep , -- Fonction de l'ouvrage d'adduction d'eau potable Codes de la table VAL_RAEPA_FONC_OUV_AE
 element.year AS anfinpose , -- Année marquant la fin de la période de mise en service de l'ouvrage
+
+-- valable uniquement pour les pompes 
 installation.fk_pipe_in AS idcanamont , -- Identifiants des canalisations d'amont de l'ouvrage (clés étrangères)
 installation.fk_pipe_out AS idcanaval , -- Identifiants des canalisations d'aval de l'ouvrage (clés étrangères)
+
 element.altitude::Numeric(10 , 3) AS z , -- Altitude (en mètres, référentiel NGF-IGN69)
 element.year AS andebpose , -- Année marquant le début de la période de mise en service de l'ouvrage
 CASE element.fk_precision
