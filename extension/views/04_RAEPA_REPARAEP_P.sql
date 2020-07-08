@@ -38,7 +38,7 @@
 */
 
 -- View: qwat_od.vw_export_leak
-CREATE VIEW raepa.raepa_repar_g AS (
+CREATE VIEW raepa.raepa_reparaep_p AS (
  SELECT leak.id::varchar(254) as idrepar ,
     st_x(leak.geometry)::numeric(10 , 3) as x,
     st_y(leak.geometry)::numeric(10 , 3) as y,
@@ -57,7 +57,7 @@ CREATE VIEW raepa.raepa_repar_g AS (
     leak.fk_pipe::text as idsuprepar,-- support de la réparation - identifiant de l'objet (ici id canalisation)
     leak.repair_date::date as daterepar,     -- date reparation,
     distributor.name::text as mouvrage, -- Maître d'ouvrage de la réparation
-    st_transform(leak.geometry, 2154)::geometry(Point , 2154) -- conversion en 2154 (est-ce une bonne idée de le faire en dur)
+    st_transform(leak.geometry, 2154)::geometry(Point , 2154) as geom -- conversion en 2154 (est-ce une bonne idée de le faire en dur)
     
    FROM qwat_od.leak
      LEFT JOIN qwat_vl.leak_cause cause ON leak.fk_cause = cause.id
@@ -66,52 +66,25 @@ CREATE VIEW raepa.raepa_repar_g AS (
 
 );
 
-COMMENT ON VIEW raepa.raepa_repar_g IS 'Lieu d''une intervention sur le réseau effectuée suite à une défaillance dudit réseau. Pour édition';
+COMMENT ON VIEW raepa.raepa_reparaep_p IS 'Lieu d''une intervention sur le réseau effectuée suite à une défaillance dudit réseau. Pour édition';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.idrepar IS 'Identifiant de la réparation effectuée';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.idrepar IS 'Identifiant de la réparation effectuée';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.x IS 'Coordonnée X Lambert 93 (en mètres)';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.x IS 'Coordonnée X Lambert 93 (en mètres)';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.y IS 'Coordonnée X Lambert 93 (en mètres)';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.y IS 'Coordonnée X Lambert 93 (en mètres)';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.supprepare IS 'Type de support de la réparation';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.supprepare IS 'Type de support de la réparation';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.defreparee IS 'Type de défaillance';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.defreparee IS 'Type de défaillance';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.idsuprepar IS 'Identifiant du support de la réparation';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.idsuprepar IS 'Identifiant du support de la réparation';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.daterepar IS 'Date de l''intervention en réparation';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.daterepar IS 'Date de l''intervention en réparation';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.mouvrage IS 'Maître d''ouvrage de la réparation';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.mouvrage IS 'Maître d''ouvrage de la réparation';
 
-COMMENT ON COLUMN raepa.raepa_repar_g.geom IS 'Géométrie ponctuelle de l''objet';
-
-COMMENT ON COLUMN raepa.raepa_repar_g.rsx IS 'Type de réseaux. AEP ou ASS';
+COMMENT ON COLUMN raepa.raepa_reparaep_p.geom IS 'Géométrie ponctuelle de l''objet';
 
 
 
-
-
-
-
--- vue des réparations AEP
-
-CREATE OR REPLACE VIEW raepa.raepa_reparaep_p AS
-SELECT
-    g.idrepar
-    , g.x
-    , g.y
-    , g.supprepare
-    , g.defreparee
-    , g.idsuprepar
-    , g.daterepar
-    , g.mouvrage
-    , g.geom
-FROM
-    raepa.raepa_repar_g g
-WHERE
-    g.rsx = 'AEP'
-ORDER BY
-    g.idrepar;
-
-COMMENT ON VIEW raepa.raepa_reparaep_p IS 'Reparation du réseau d''adduction d''eau';
