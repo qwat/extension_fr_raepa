@@ -51,23 +51,10 @@ ALTER TABLE raepa.raepa_repar_g
             UPDATE
                 NO ACTION ON DELETE NO ACTION;
 
-CREATE OR REPLACE VIEW raepa.raepa_reparaep AS
-SELECT
-    g.idrepar
-    , g.x
-    , g.y
-    , g.supprepare
-    , g.defreparee
-    , g.idsuprepar
-    , g.daterepar
-    , g.mouvrage
-    , g.geom
-FROM
-    raepa.raepa_repar_g g
-ORDER BY
-    g.idrepar;
 
-COMMENT ON TABLE raepa.raepa_repar_g IS 'Lieu d''une intervention sur le réseau effectuée suite à une défaillance dudit réseau. Pour lecture et conformité au RAEPA';
+
+
+
 
 CREATE OR REPLACE VIEW raepa.raepa_reparaep_p AS
 SELECT
