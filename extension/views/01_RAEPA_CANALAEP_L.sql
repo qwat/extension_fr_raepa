@@ -74,7 +74,7 @@ SELECT
     WHEN 4101 THEN
         '01' -- conduite de transport
     WHEN 4105 THEN
-        '02' -- condtuie de distribution
+        '02' -- conduite de distribution
     WHEN 102 THEN
         '00' -- inconnu -> inconnu
     WHEN 103 THEN
