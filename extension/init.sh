@@ -77,9 +77,9 @@ then
 fi
 
 if [[ "$DROPSCHEMA" -eq 1 ]]; then
-  echo "--- dropping schema raepa --- "
+  echo "--- dropping schema qwat_raepa --- "
 	psql service=${PGSERVICE} -v ON_ERROR_STOP=1 \
-         -c "DROP SCHEMA IF EXISTS raepa CASCADE"
+         -c "DROP SCHEMA IF EXISTS qwat_raepa CASCADE"
 fi
 
 echo ----- deactivate audit triggers ------------------------------
@@ -87,24 +87,24 @@ echo ----- deactivate audit triggers ------------------------------
 psql service=${PGSERVICE} -f ${RAEPA_DIR}/delta/pre-all.sql
 
 
-# create the raepa schema
-echo "--- creating schema raepa --- "
-psql service=$PGSERVICE -v ON_ERROR_STOP=1 -c "CREATE SCHEMA IF NOT EXISTS raepa"
+# create the qwat_raepa schema
+echo "--- creating schema qwat_raepa --- "
+psql service=$PGSERVICE -v ON_ERROR_STOP=1 -c "CREATE SCHEMA IF NOT EXISTS qwat_raepa"
 
 # execute global pre-all logic (drop views & co)
 
-# add the raepa columns
-echo "--- adding raepa columns --- "
+# add the qwat_raepa columns
+echo "--- adding qwat_raepa columns --- "
 
 psql service=$PGSERVICE -v ON_ERROR_STOP=1 -v SRID=$SRID -f ${RAEPA_DIR}/raepa_columns.sql
 
 # execute global post-all logic (recreate views, functions, enable audit triggers )
 
-# re-create the QWAT views, for the new raepa columns to be taken into account
-echo "--- recreating raepa views (core views untouched)---- "
+# re-create the QWAT views, for the new qwat_raepa columns to be taken into account
+echo "--- recreating qwat_raepa views (core views untouched)---- "
 PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/rewrite_views.sh 
 
-# create the raepa views
+# create the qwat_raepa views
 PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/insert_views.sh
 
 echo "---- reactivate audit triggers ------- "

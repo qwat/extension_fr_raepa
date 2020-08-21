@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW raepa.raepa_apparaep_p AS
+CREATE OR REPLACE VIEW qwat_raepa.raepa_apparaep_p AS
 --
 -- DÉBUT DE qwat_od.vw_export_hydrant
 --

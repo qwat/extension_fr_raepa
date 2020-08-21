@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW raepa.raepa_ouvraep_p AS
+CREATE OR REPLACE VIEW qwat_raepa.raepa_ouvraep_p AS
 SELECT
     element.id::varchar(254) AS idouvrage , -- Identifiant de l'ouvrage (clé primaire)
     -- TODO element.id ou element.identification ?
