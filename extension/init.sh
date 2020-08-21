@@ -107,6 +107,11 @@ PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/rewrite_views.sh
 # create the qwat_raepa views
 PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/insert_views.sh
 
+# grants 
+
+PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/roles.sh
+
+
 echo "---- reactivate audit triggers ------- "
 
 psql service=${PGSERVICE} -f ${RAEPA_DIR}/delta/post-all.sql
