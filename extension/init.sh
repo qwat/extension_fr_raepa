@@ -84,7 +84,7 @@ fi
 
 echo ----- deactivate audit triggers ------------------------------
 
-psql -U postgres service=${PGSERVICE} -f ${RAEPA_DIR}/delta/pre-all.sql
+psql service=${PGSERVICE} -f ${RAEPA_DIR}/delta/pre-all.sql
 
 
 # create the raepa schema
@@ -109,6 +109,6 @@ PGSERVICE=${PGSERVICE} SRID=${SRID} ${RAEPA_DIR}/insert_views.sh
 
 echo "---- reactivate audit triggers ------- "
 
-psql -U postgres service=${PGSERVICE} -f ${RAEPA_DIR}/delta/post-all.sql
+psql service=${PGSERVICE} -f ${RAEPA_DIR}/delta/post-all.sql
 
 exit 0
