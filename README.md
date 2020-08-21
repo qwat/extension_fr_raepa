@@ -1,4 +1,4 @@
-# QWAT extension for French COAVADIS RAEPA extension
+# QWAT extension for French COVADIS RAEPA extension
 
 This extension adds views in a QWAT data structure to expose QWAT datasets to the [RAEPA standard](http://www.geoinformations.developpement-durable.gouv.fr/geostandard-reseaux-d-adduction-d-eau-potable-et-d-a3478.html). 
 
