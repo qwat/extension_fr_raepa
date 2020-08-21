@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW raepa.raepa_canalaep_l AS
+CREATE OR REPLACE VIEW qwat_raepa.raepa_canalaep_l AS
 SELECT
     pipe.id::text AS idcana , -- Identifiant de la canalisation (clé primaire)
     pipe.geometry AS geom , -- Géométrie

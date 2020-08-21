@@ -1,29 +1,29 @@
 -- SCHEMA
-DROP SCHEMA IF EXISTS raepa CASCADE;
+DROP SCHEMA IF EXISTS qwat_raepa CASCADE;
 
-CREATE SCHEMA raepa;
+CREATE SCHEMA qwat_raepa;
 
-COMMENT ON SCHEMA raepa IS 'Réseaux humides au standard RAEPA';
+COMMENT ON SCHEMA qwat_raepa IS 'Réseaux humides au standard RAEPA';
 
 -- TABLES
 -- GENERIQUES
 
-CREATE TABLE raepa.val_raepa_materiau (
+CREATE TABLE qwat_raepa.val_raepa_materiau (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_materiau_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_materiau IS 'Matériau constitutif des tuyaux composant une canalisation';
+COMMENT ON TABLE qwat_raepa.val_raepa_materiau IS 'Matériau constitutif des tuyaux composant une canalisation';
 
-COMMENT ON COLUMN raepa.val_raepa_materiau.code IS 'Code de la liste énumérée relative au matériau constitutif des tuyaux composant une canalisation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_materiau.code IS 'Code de la liste énumérée relative au matériau constitutif des tuyaux composant une canalisation';
 
-COMMENT ON COLUMN raepa.val_raepa_materiau.valeur IS 'Valeur de la liste énumérée relative au matériau constitutif des tuyaux composant une canalisation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_materiau.valeur IS 'Valeur de la liste énumérée relative au matériau constitutif des tuyaux composant une canalisation';
 
-COMMENT ON COLUMN raepa.val_raepa_materiau.definition IS 'Définition de la liste énumérée relative au matériau constitutif des tuyaux composant une canalisation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_materiau.definition IS 'Définition de la liste énumérée relative au matériau constitutif des tuyaux composant une canalisation';
 
-INSERT INTO raepa.val_raepa_materiau (code
+INSERT INTO qwat_raepa.val_raepa_materiau (code
     , valeur
     , definition)
     VALUES ('00'
@@ -117,22 +117,22 @@ INSERT INTO raepa.val_raepa_materiau (code
         , 'Autre'
         , 'Canalisation composée de tuyaux dont le matériau ne figure pas dans la liste ci-dessus');
 
-CREATE TABLE raepa.val_raepa_mode_circulation (
+CREATE TABLE qwat_raepa.val_raepa_mode_circulation (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_mode_circulation_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_mode_circulation IS 'Modalité de circulation de l''eau dans une canalisation';
+COMMENT ON TABLE qwat_raepa.val_raepa_mode_circulation IS 'Modalité de circulation de l''eau dans une canalisation';
 
-COMMENT ON COLUMN raepa.val_raepa_mode_circulation.code IS 'Code de la liste énumérée relative au mode de circualtion de l''eau dans une canalisation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_mode_circulation.code IS 'Code de la liste énumérée relative au mode de circualtion de l''eau dans une canalisation';
 
-COMMENT ON COLUMN raepa.val_raepa_mode_circulation.valeur IS 'Valeur de la liste énumérée relative au mode de circualtion de l''eau dans une canalisation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_mode_circulation.valeur IS 'Valeur de la liste énumérée relative au mode de circualtion de l''eau dans une canalisation';
 
-COMMENT ON COLUMN raepa.val_raepa_mode_circulation.definition IS 'Définition de la liste énumérée relative au mode de circualtion de l''eau dans une canalisation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_mode_circulation.definition IS 'Définition de la liste énumérée relative au mode de circualtion de l''eau dans une canalisation';
 
-INSERT INTO raepa.val_raepa_mode_circulation (code
+INSERT INTO qwat_raepa.val_raepa_mode_circulation (code
     , valeur
     , definition)
     VALUES ('00'
@@ -151,22 +151,22 @@ INSERT INTO raepa.val_raepa_mode_circulation (code
         , 'Autre'
         , 'L''eau circule tantôt dans un des modes ci-dessus tantôt dans un autre');
 
-CREATE TABLE raepa.val_raepa_qualite_anpose (
+CREATE TABLE qwat_raepa.val_raepa_qualite_anpose (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_qualite_anpose_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_qualite_anpose IS 'Qualité de l''information "année de pose" ou "année de mise en service" d''un équipement';
+COMMENT ON TABLE qwat_raepa.val_raepa_qualite_anpose IS 'Qualité de l''information "année de pose" ou "année de mise en service" d''un équipement';
 
-COMMENT ON COLUMN raepa.val_raepa_qualite_anpose.code IS 'Code de la liste énumérée relative à la qualité de l''information "année de pose" ou "année de mise en service" d''un équipement';
+COMMENT ON COLUMN qwat_raepa.val_raepa_qualite_anpose.code IS 'Code de la liste énumérée relative à la qualité de l''information "année de pose" ou "année de mise en service" d''un équipement';
 
-COMMENT ON COLUMN raepa.val_raepa_qualite_anpose.valeur IS 'Valeur de la liste énumérée relative à la qualité de l''information "année de pose" ou "année de mise en service" d''un équipement';
+COMMENT ON COLUMN qwat_raepa.val_raepa_qualite_anpose.valeur IS 'Valeur de la liste énumérée relative à la qualité de l''information "année de pose" ou "année de mise en service" d''un équipement';
 
-COMMENT ON COLUMN raepa.val_raepa_qualite_anpose.definition IS 'Définition de la liste énumérée relative à la qualité de l''information "année de pose" ou "année de mise en service" d''un équipement';
+COMMENT ON COLUMN qwat_raepa.val_raepa_qualite_anpose.definition IS 'Définition de la liste énumérée relative à la qualité de l''information "année de pose" ou "année de mise en service" d''un équipement';
 
-INSERT INTO raepa.val_raepa_qualite_anpose (code
+INSERT INTO qwat_raepa.val_raepa_qualite_anpose (code
     , valeur
     , definition)
     VALUES ('00'
@@ -188,22 +188,22 @@ INSERT INTO raepa.val_raepa_qualite_anpose (code
         , 'Déduite'
         , 'Année déduite du matériau ou de l''état de l''équipement');
 
-CREATE TABLE raepa.val_raepa_defaillance (
+CREATE TABLE qwat_raepa.val_raepa_defaillance (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_defaillance_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_defaillance IS 'Type de défaillance ayant rendu nécessaire une réparation';
+COMMENT ON TABLE qwat_raepa.val_raepa_defaillance IS 'Type de défaillance ayant rendu nécessaire une réparation';
 
-COMMENT ON COLUMN raepa.val_raepa_defaillance.code IS 'Code de la liste énumérée relative au type de défaillance';
+COMMENT ON COLUMN qwat_raepa.val_raepa_defaillance.code IS 'Code de la liste énumérée relative au type de défaillance';
 
-COMMENT ON COLUMN raepa.val_raepa_defaillance.valeur IS 'Valeur de la liste énumérée relative au type de défaillance';
+COMMENT ON COLUMN qwat_raepa.val_raepa_defaillance.valeur IS 'Valeur de la liste énumérée relative au type de défaillance';
 
-COMMENT ON COLUMN raepa.val_raepa_defaillance.definition IS 'Définition de la liste énumérée relative au type de défaillance';
+COMMENT ON COLUMN qwat_raepa.val_raepa_defaillance.definition IS 'Définition de la liste énumérée relative au type de défaillance';
 
-INSERT INTO raepa.val_raepa_defaillance (code
+INSERT INTO qwat_raepa.val_raepa_defaillance (code
     , valeur
     , definition)
     VALUES ('00'
@@ -231,22 +231,22 @@ INSERT INTO raepa.val_raepa_defaillance (code
         , 'Autre'
         , 'Défaillance dont le type ne figure pas dans la liste ci-dessus');
 
-CREATE TABLE raepa.val_raepa_qualite_geoloc (
+CREATE TABLE qwat_raepa.val_raepa_qualite_geoloc (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_qualite_geoloc_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_qualite_geoloc IS 'Classe de précision au sens de l''arrêté interministériel du 15 février 2012 modifié (DT-DICT)';
+COMMENT ON TABLE qwat_raepa.val_raepa_qualite_geoloc IS 'Classe de précision au sens de l''arrêté interministériel du 15 février 2012 modifié (DT-DICT)';
 
-COMMENT ON COLUMN raepa.val_raepa_qualite_geoloc.code IS 'Code de la liste énumérée relative à la classe de précision au sens de l''arrêté interministériel du 15 février 2012 modifié (DT-DICT)';
+COMMENT ON COLUMN qwat_raepa.val_raepa_qualite_geoloc.code IS 'Code de la liste énumérée relative à la classe de précision au sens de l''arrêté interministériel du 15 février 2012 modifié (DT-DICT)';
 
-COMMENT ON COLUMN raepa.val_raepa_qualite_geoloc.valeur IS 'Valeur de la liste énumérée relative à la classe de précision au sens de l''arrêté interministériel du 15 février 2012 modifié (DT-DICT)';
+COMMENT ON COLUMN qwat_raepa.val_raepa_qualite_geoloc.valeur IS 'Valeur de la liste énumérée relative à la classe de précision au sens de l''arrêté interministériel du 15 février 2012 modifié (DT-DICT)';
 
-COMMENT ON COLUMN raepa.val_raepa_qualite_geoloc.definition IS 'Définition de la liste énumérée relative à la classe de précision au sens de l''arrêté interministériel du 15 février 2012 modifié (DT-DICT)';
+COMMENT ON COLUMN qwat_raepa.val_raepa_qualite_geoloc.definition IS 'Définition de la liste énumérée relative à la classe de précision au sens de l''arrêté interministériel du 15 février 2012 modifié (DT-DICT)';
 
-INSERT INTO raepa.val_raepa_qualite_geoloc (code
+INSERT INTO qwat_raepa.val_raepa_qualite_geoloc (code
     , valeur
     , definition)
     VALUES ('01'
@@ -259,22 +259,22 @@ INSERT INTO raepa.val_raepa_qualite_geoloc (code
         , 'Classe C'
         , 'Classe de précision supérieure à 1,50 m');
 
-CREATE TABLE raepa.val_raepa_support_incident (
+CREATE TABLE qwat_raepa.val_raepa_support_incident (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_support_incident_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_support_incident IS 'Type d''élément de réseau concerné par un incident';
+COMMENT ON TABLE qwat_raepa.val_raepa_support_incident IS 'Type d''élément de réseau concerné par un incident';
 
-COMMENT ON COLUMN raepa.val_raepa_support_incident.code IS 'Code de la liste énumérée relative au type d''élément de réseau concerné par une réparation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_support_incident.code IS 'Code de la liste énumérée relative au type d''élément de réseau concerné par une réparation';
 
-COMMENT ON COLUMN raepa.val_raepa_support_incident.valeur IS 'Valeur de la liste énumérée relative au type d''élément de réseau concerné par une réparation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_support_incident.valeur IS 'Valeur de la liste énumérée relative au type d''élément de réseau concerné par une réparation';
 
-COMMENT ON COLUMN raepa.val_raepa_support_incident.definition IS 'Définition de la liste énumérée relative au type d''élément de réseau concerné par une réparation';
+COMMENT ON COLUMN qwat_raepa.val_raepa_support_incident.definition IS 'Définition de la liste énumérée relative au type d''élément de réseau concerné par une réparation';
 
-INSERT INTO raepa.val_raepa_support_incident (code
+INSERT INTO qwat_raepa.val_raepa_support_incident (code
     , valeur
     , definition)
     VALUES ('01'
@@ -288,22 +288,22 @@ INSERT INTO raepa.val_raepa_support_incident (code
         , 'Réparation d''un ouvrage');
 
 -- AEP
-CREATE TABLE raepa.val_raepa_cat_canal_ae (
+CREATE TABLE qwat_raepa.val_raepa_cat_canal_ae (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_cat_canal_ae_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_cat_canal_ae IS 'Nature des eaux véhiculées par une canalisation d''adduction d''eau';
+COMMENT ON TABLE qwat_raepa.val_raepa_cat_canal_ae IS 'Nature des eaux véhiculées par une canalisation d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_canal_ae.code IS 'Code de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_canal_ae.code IS 'Code de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_canal_ae.valeur IS 'Valeur de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_canal_ae.valeur IS 'Valeur de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_canal_ae.definition IS 'Définition de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_canal_ae.definition IS 'Définition de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''adduction d''eau';
 
-INSERT INTO raepa.val_raepa_cat_canal_ae (code
+INSERT INTO qwat_raepa.val_raepa_cat_canal_ae (code
     , valeur
     , definition)
     VALUES ('00'
@@ -319,22 +319,22 @@ INSERT INTO raepa.val_raepa_cat_canal_ae (code
         , 'Autre'
         , 'Canalisation véhiculant tantôt de l''eau brute, tantôt de l''eau potable');
 
-CREATE TABLE raepa.val_raepa_fonc_canal_ae (
+CREATE TABLE qwat_raepa.val_raepa_fonc_canal_ae (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_fonc_canal_ae_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_fonc_canal_ae IS 'Fonction dans le réseau d''une canalisation d''adduction d''eau';
+COMMENT ON TABLE qwat_raepa.val_raepa_fonc_canal_ae IS 'Fonction dans le réseau d''une canalisation d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_fonc_canal_ae.code IS 'Code de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_fonc_canal_ae.code IS 'Code de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_fonc_canal_ae.valeur IS 'Valeur de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_fonc_canal_ae.valeur IS 'Valeur de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_fonc_canal_ae.definition IS 'Définition de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_fonc_canal_ae.definition IS 'Définition de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''adduction d''eau';
 
-INSERT INTO raepa.val_raepa_fonc_canal_ae (code
+INSERT INTO qwat_raepa.val_raepa_fonc_canal_ae (code
     , valeur
     , definition)
     VALUES ('00'
@@ -350,22 +350,22 @@ INSERT INTO raepa.val_raepa_fonc_canal_ae (code
         , 'Autre'
         , 'Canalisation dont la fonction dans le réseau ne figure pas dans la liste ci-dessus');
 
-CREATE TABLE raepa.val_raepa_cat_app_ae (
+CREATE TABLE qwat_raepa.val_raepa_cat_app_ae (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_cat_app_ae_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_cat_app_ae IS 'Type d''un appareillage d''adduction d''eau';
+COMMENT ON TABLE qwat_raepa.val_raepa_cat_app_ae IS 'Type d''un appareillage d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_app_ae.code IS 'Code de la liste énumérée relative au type d''un appareillage d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_app_ae.code IS 'Code de la liste énumérée relative au type d''un appareillage d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_app_ae.valeur IS 'Valeur de la liste énumérée relative au type d''un appareillage d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_app_ae.valeur IS 'Valeur de la liste énumérée relative au type d''un appareillage d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_app_ae.definition IS 'Définition de la liste énumérée relative au type d''un appareillage d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_app_ae.definition IS 'Définition de la liste énumérée relative au type d''un appareillage d''adduction d''eau';
 
-INSERT INTO raepa.val_raepa_cat_app_ae (code
+INSERT INTO qwat_raepa.val_raepa_cat_app_ae (code
     , valeur
     , definition)
     VALUES ('00'
@@ -399,22 +399,22 @@ INSERT INTO raepa.val_raepa_cat_app_ae (code
         , 'Autre'
         , 'Appareillage dont le type ne figure pas dans la liste ci-dessus');
 
-CREATE TABLE raepa.val_raepa_cat_ouv_ae (
+CREATE TABLE qwat_raepa.val_raepa_cat_ouv_ae (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_cat_ouv_ae_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_cat_ouv_ae IS 'Type d''un ouvrage d''adduction d''eau';
+COMMENT ON TABLE qwat_raepa.val_raepa_cat_ouv_ae IS 'Type d''un ouvrage d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_ouv_ae.code IS 'Code de la liste énumérée relative au type d''un ouvrage d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_ouv_ae.code IS 'Code de la liste énumérée relative au type d''un ouvrage d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_ouv_ae.valeur IS 'Valeur de la liste énumérée relative au type d''un ouvrage d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_ouv_ae.valeur IS 'Valeur de la liste énumérée relative au type d''un ouvrage d''adduction d''eau';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_ouv_ae.definition IS 'Définition de la liste énumérée relative au type d''un ouvrage d''adduction d''eau';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_ouv_ae.definition IS 'Définition de la liste énumérée relative au type d''un ouvrage d''adduction d''eau';
 
-INSERT INTO raepa.val_raepa_cat_ouv_ae (code
+INSERT INTO qwat_raepa.val_raepa_cat_ouv_ae (code
     , valeur
     , definition)
     VALUES ('00'
@@ -440,22 +440,22 @@ INSERT INTO raepa.val_raepa_cat_ouv_ae (code
         , 'Ouvrage dont le type ne figure pas dans la liste ci-dessus');
 
 -- ASS
-CREATE TABLE raepa.val_raepa_cat_reseau_ass (
+CREATE TABLE qwat_raepa.val_raepa_cat_reseau_ass (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_cat_reseau_ass_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_cat_reseau_ass IS 'Type de réseau d''assainissement collectif';
+COMMENT ON TABLE qwat_raepa.val_raepa_cat_reseau_ass IS 'Type de réseau d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_reseau_ass.code IS 'Code de la liste énumérée relative au type de réseau d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_reseau_ass.code IS 'Code de la liste énumérée relative au type de réseau d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_reseau_ass.valeur IS 'Valeur de la liste énumérée relative au type de réseau d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_reseau_ass.valeur IS 'Valeur de la liste énumérée relative au type de réseau d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_reseau_ass.definition IS 'Définition de la liste énumérée relative au type de réseau d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_reseau_ass.definition IS 'Définition de la liste énumérée relative au type de réseau d''assainissement collectif';
 
-INSERT INTO raepa.val_raepa_cat_reseau_ass (code
+INSERT INTO qwat_raepa.val_raepa_cat_reseau_ass (code
     , valeur
     , definition)
     VALUES ('01'
@@ -468,22 +468,22 @@ INSERT INTO raepa.val_raepa_cat_reseau_ass (code
         , 'Unitaire'
         , 'Réseau de collecte des eaux usées et des eaux pluviales');
 
-CREATE TABLE raepa.val_raepa_cat_canal_ass (
+CREATE TABLE qwat_raepa.val_raepa_cat_canal_ass (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_cat_canal_ass_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_cat_canal_ass IS 'Nature des eaux véhiculées par une canalisation d''assainissement collectif';
+COMMENT ON TABLE qwat_raepa.val_raepa_cat_canal_ass IS 'Nature des eaux véhiculées par une canalisation d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_canal_ass.code IS 'Code de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_canal_ass.code IS 'Code de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_canal_ass.valeur IS 'Valeur de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_canal_ass.valeur IS 'Valeur de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_canal_ass.definition IS 'Définition de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_canal_ass.definition IS 'Définition de la liste énumérée relative à la nature des eaux véhiculées par une canalisation d''assainissement collectif';
 
-INSERT INTO raepa.val_raepa_cat_canal_ass (code
+INSERT INTO qwat_raepa.val_raepa_cat_canal_ass (code
     , valeur
     , definition)
     VALUES ('00'
@@ -502,22 +502,22 @@ INSERT INTO raepa.val_raepa_cat_canal_ass (code
         , 'Autre'
         , 'Canalisation véhiculant tantôt des eaux pluviales, tantôt des eaux usées');
 
-CREATE TABLE raepa.val_raepa_fonc_canal_ass (
+CREATE TABLE qwat_raepa.val_raepa_fonc_canal_ass (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_fonc_canal_ass_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_fonc_canal_ass IS 'Fonction dans le réseau d''une canalisation d''assainissement collectif';
+COMMENT ON TABLE qwat_raepa.val_raepa_fonc_canal_ass IS 'Fonction dans le réseau d''une canalisation d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_fonc_canal_ass.code IS 'Code de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_fonc_canal_ass.code IS 'Code de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_fonc_canal_ass.valeur IS 'Valeur de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_fonc_canal_ass.valeur IS 'Valeur de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_fonc_canal_ass.definition IS 'Définition de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_fonc_canal_ass.definition IS 'Définition de la liste énumérée relative à la fonction dans le réseau d''une canalisation d''assainissement collectif';
 
-INSERT INTO raepa.val_raepa_fonc_canal_ass (code
+INSERT INTO qwat_raepa.val_raepa_fonc_canal_ass (code
     , valeur
     , definition)
     VALUES ('00'
@@ -533,22 +533,22 @@ INSERT INTO raepa.val_raepa_fonc_canal_ass (code
         , 'Autre'
         , 'Canalisation dont la fonction dans le réseau ne figure pas dans la liste ci-dessus');
 
-CREATE TABLE raepa.val_raepa_cat_app_ass (
+CREATE TABLE qwat_raepa.val_raepa_cat_app_ass (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_cat_app_ass_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_cat_app_ass IS 'Type d''un appareillage d''assainissement collectif';
+COMMENT ON TABLE qwat_raepa.val_raepa_cat_app_ass IS 'Type d''un appareillage d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_app_ass.code IS 'Code de la liste énumérée relative au type d''un appareillage d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_app_ass.code IS 'Code de la liste énumérée relative au type d''un appareillage d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_app_ass.valeur IS 'Valeur de la liste énumérée relative au type d''un appareillage d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_app_ass.valeur IS 'Valeur de la liste énumérée relative au type d''un appareillage d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_app_ass.definition IS 'Définition de la liste énumérée relative au type d''un appareillage d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_app_ass.definition IS 'Définition de la liste énumérée relative au type d''un appareillage d''assainissement collectif';
 
-INSERT INTO raepa.val_raepa_cat_app_ass (code
+INSERT INTO qwat_raepa.val_raepa_cat_app_ass (code
     , valeur
     , definition)
     VALUES ('00'
@@ -570,22 +570,22 @@ INSERT INTO raepa.val_raepa_cat_app_ass (code
         , 'Autre'
         , 'Appareillage dont le type ne figure pas dans la liste ci-dessus');
 
-CREATE TABLE raepa.val_raepa_cat_ouv_ass (
+CREATE TABLE qwat_raepa.val_raepa_cat_ouv_ass (
     code character varying(2) NOT NULL
     , valeur character varying(80) NOT NULL
     , definition character varying(255)
     , CONSTRAINT raepa_cat_ouv_ass_pkey PRIMARY KEY (code)
 );
 
-COMMENT ON TABLE raepa.val_raepa_cat_ouv_ass IS 'Type d''un ouvrage d''assainissement collectif';
+COMMENT ON TABLE qwat_raepa.val_raepa_cat_ouv_ass IS 'Type d''un ouvrage d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_ouv_ass.code IS 'Code de la liste énumérée relative au type d''un ouvrage d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_ouv_ass.code IS 'Code de la liste énumérée relative au type d''un ouvrage d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_ouv_ass.valeur IS 'Valeur de la liste énumérée relative au type d''un ouvrage d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_ouv_ass.valeur IS 'Valeur de la liste énumérée relative au type d''un ouvrage d''assainissement collectif';
 
-COMMENT ON COLUMN raepa.val_raepa_cat_ouv_ass.definition IS 'Définition de la liste énumérée relative au type d''un ouvrage d''assainissement collectif';
+COMMENT ON COLUMN qwat_raepa.val_raepa_cat_ouv_ass.definition IS 'Définition de la liste énumérée relative au type d''un ouvrage d''assainissement collectif';
 
-INSERT INTO raepa.val_raepa_cat_ouv_ass (code
+INSERT INTO qwat_raepa.val_raepa_cat_ouv_ass (code
     , valeur
     , definition)
     VALUES ('00'

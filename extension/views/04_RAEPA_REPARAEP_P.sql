@@ -3,29 +3,29 @@
 
  -- support réparation : table non crée, ne concerne que les conduites via les fuites dans QWAT
 
-    -- drop table if exists raepa.val_raepa_support_reparation ;
+    -- drop table if exists qwat_raepa.val_raepa_support_reparation ;
 
-    -- create table raepa.val_raepa_support_reparation (
+    -- create table qwat_raepa.val_raepa_support_reparation (
     --     code varchar(2) CONSTRAINT pk_val_raepa_support_reparation PRIMARY KEY,
     --     libelle varchar(254), 
     --     "definition" varchar(254) 
     -- ) ; 
 
-    -- INSERT into raepa.val_raepa_support_reparation ( code, libelle, definition) VALUES 
+    -- INSERT into qwat_raepa.val_raepa_support_reparation ( code, libelle, definition) VALUES 
     --     ('01',	'Canalisation',	'Réparation sur une canalisation'),
     --     ('02',	'Appareillage',	'Réparation d''un appareillage'),
     --     ('03',	'Ouvrage',	'Réparation d''un ouvrage');
 
 --- Défaillances : table non créée cardinalités qui ne matchent pas. On bascule en case when 
--- drop table if exists raepa.val_raepa_type_defaillance ;
+-- drop table if exists qwat_raepa.val_raepa_type_defaillance ;
 
---     create table raepa.val_raepa_type_defaillance (
+--     create table qwat_raepa.val_raepa_type_defaillance (
 --         code varchar(2) CONSTRAINT pk_val_raepa_type_defaillancen PRIMARY KEY,
 --         libelle varchar(254), 
 --         "definition" varchar(254), 
 --     ) ; 
 
---     INSERT into raepa.val_raepa_type_defaillance ( code, libelle, definition) VALUES 
+--     INSERT into qwat_raepa.val_raepa_type_defaillance ( code, libelle, definition) VALUES 
 /*
 ('99',	'Autre',	'Défaillance dont le type ne figure pas dans la liste ci-dessus'), -- 101 (autre) + 9104 (corrosion) + 9103 (arrachée) + 9105 (pièce non étanche)
 ('01',	'Casse', 'longitudinale	Canalisation fendue sur sa longueur'), --9102 (longitudinale)
@@ -38,7 +38,7 @@
 */
 
 -- View: qwat_od.vw_export_leak
-CREATE VIEW raepa.raepa_reparaep_p AS (
+CREATE VIEW qwat_raepa.raepa_reparaep_p AS (
  SELECT leak.id::varchar(254) as idrepar ,
     st_x(leak.geometry)::numeric(10 , 3) as x,
     st_y(leak.geometry)::numeric(10 , 3) as y,
@@ -66,25 +66,25 @@ CREATE VIEW raepa.raepa_reparaep_p AS (
 
 );
 
-COMMENT ON VIEW raepa.raepa_reparaep_p IS 'Lieu d''une intervention sur le réseau effectuée suite à une défaillance dudit réseau. Pour édition';
+COMMENT ON VIEW qwat_raepa.raepa_reparaep_p IS 'Lieu d''une intervention sur le réseau effectuée suite à une défaillance dudit réseau. Pour édition';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.idrepar IS 'Identifiant de la réparation effectuée';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.idrepar IS 'Identifiant de la réparation effectuée';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.x IS 'Coordonnée X Lambert 93 (en mètres)';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.x IS 'Coordonnée X Lambert 93 (en mètres)';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.y IS 'Coordonnée X Lambert 93 (en mètres)';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.y IS 'Coordonnée X Lambert 93 (en mètres)';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.supprepare IS 'Type de support de la réparation';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.supprepare IS 'Type de support de la réparation';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.defreparee IS 'Type de défaillance';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.defreparee IS 'Type de défaillance';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.idsuprepar IS 'Identifiant du support de la réparation';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.idsuprepar IS 'Identifiant du support de la réparation';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.daterepar IS 'Date de l''intervention en réparation';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.daterepar IS 'Date de l''intervention en réparation';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.mouvrage IS 'Maître d''ouvrage de la réparation';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.mouvrage IS 'Maître d''ouvrage de la réparation';
 
-COMMENT ON COLUMN raepa.raepa_reparaep_p.geom IS 'Géométrie ponctuelle de l''objet';
+COMMENT ON COLUMN qwat_raepa.raepa_reparaep_p.geom IS 'Géométrie ponctuelle de l''objet';
 
 
 
