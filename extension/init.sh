@@ -93,11 +93,6 @@ psql service=$PGSERVICE -v ON_ERROR_STOP=1 -c "CREATE SCHEMA IF NOT EXISTS qwat_
 
 # execute global pre-all logic (drop views & co)
 
-# add the qwat_raepa columns
-echo "--- adding qwat_raepa columns --- "
-
-psql service=$PGSERVICE -v ON_ERROR_STOP=1 -v SRID=$SRID -f ${RAEPA_DIR}/raepa_columns.sql
-
 # execute global post-all logic (recreate views, functions, enable audit triggers )
 
 # re-create the QWAT views, for the new qwat_raepa columns to be taken into account
