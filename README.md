@@ -4,7 +4,7 @@ This extension adds views in a QWAT data structure to expose QWAT datasets to th
 
 ## Usage
 
-First have a QWAT database somewhere. See QWAT's doc for a [full install from sources for developpers](https://qwat.github.io/docs/master/en/html/installation-guide/index.html) or a classical [dump-restore for testing purposes](https://qwat.github.io/docs/master/en/html/demo-guide/index.html)
+First have a QWAT database somewhere. See QWAT's doc for a [full install from sources for developpers](https://qwat.github.io/docs/main/en/html/installation-guide/index.html) or a classical [dump-restore for testing purposes](https://qwat.github.io/docs/main/en/html/demo-guide/index.html)
 
 The clone or download this repository on a work directory your server :
 
